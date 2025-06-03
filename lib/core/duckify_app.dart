@@ -22,7 +22,13 @@ class _MyApp extends State<MyApp>{
         ),
       ],
       child: MaterialApp(
-        theme: ThemeData(),
+        theme: ThemeData(
+          appBarTheme: AppBarTheme(
+            iconTheme: IconThemeData(
+              color: Colors.amberAccent
+            )
+          )
+        ),
         debugShowCheckedModeBanner: false,
         home: HomeScreen(),
       ),
