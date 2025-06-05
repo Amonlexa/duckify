@@ -1,6 +1,8 @@
+import 'package:duckify/cubits/duck_audio_cubit.dart';
 import 'package:duckify/presentation/widgets/play_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DuckOverviewScreen extends StatefulWidget {
 
@@ -86,29 +88,14 @@ class _DuckOverviewScreen extends State<DuckOverviewScreen>{
                soundName: 'Кряква',
                duration: '09',
                isPlaying: false,
-               onPlayPressed: () {  },
+               onPlayPressed: () {
+                 context.read<DuckAudioCubit>().selectSound();
+                 context.read<DuckAudioCubit>().playSelectedSound();
+               },
                onFavoritePressed: () {
 
                },
            ),
-            SoundListItem(
-              soundName: 'Кряква',
-              duration: '09',
-              isPlaying: false,
-              onPlayPressed: () {  },
-              onFavoritePressed: () {
-
-              },
-            ),
-            SoundListItem(
-              soundName: 'Кряква',
-              duration: '09',
-              isPlaying: false,
-              onPlayPressed: () {  },
-              onFavoritePressed: () {
-
-              },
-            )
           ],
         ),
       ),

@@ -12,6 +12,7 @@ dependencies:
   flutter_bloc: ^8.1.6
   cupertino_icons: ^1.0.8
   audio_service: ^0.18.18
+  just_audio: ^0.10.3
 
 dev_dependencies:
   flutter_test:
