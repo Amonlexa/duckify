@@ -7,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DuckAudioCubit extends Cubit<DuckAudioState> {
   final DuckAudioRepository _repository;
-  final DuckifyAudioHandler _audioHandler;
+  final DuckIfyAudioHandler _audioHandler;
 
   DuckAudioCubit(this._repository, this._audioHandler) : super(DuckCallInitial());
 
@@ -21,21 +21,16 @@ class DuckAudioCubit extends Cubit<DuckAudioState> {
     }
   }
 
-  void selectSound() {
-    print('play1');
-    emit(DuckCallLoaded(sounds: [],currentSound: DuckAudio("id", "title", "description", "assets/audios/kryakva.mp3", "image", [''])));
+
+  void selectAndPlaySound() {
+    print('play2');
+    _audioHandler.playSoundWithDelay("assets/audios/kryakva.mp3", "Звук", '');
+    emit(DuckCallLoaded(currentSound: DuckAudio("id", "title", "description", "assets/audios/kryakva.mp3", "image", ['']), sounds: []));
   }
 
-  void playSelectedSound() {
-    print('play2');
-    final selected = (state as DuckCallLoaded).currentSound;
-    if (selected != null) {
-      _audioHandler.mediaItem.add(MediaItem(
-        id: "selected.assetPath",
-        title: "selected.name",
-        album: "selected.category",
-      ));
-      _audioHandler.playSound("assets/audios/kryakva.mp3");
-    }
+  void stopSound() async{
+    _audioHandler.stop(); // или pauseSound(), зависит от логики
+    emit(DuckCallLoaded(sounds: [])); // Обновляем состояние
   }
+
 }

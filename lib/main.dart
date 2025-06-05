@@ -6,11 +6,11 @@ import 'core/duckify_audio_handler.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await AudioService.init(builder: () => DuckifyAudioHandler(),
+  await AudioService.init(builder: () => DuckIfyAudioHandler(),
     config: const AudioServiceConfig(
       androidNotificationChannelId: 'duck_call_channel',
       androidNotificationChannelName: 'Duck Sounds',
-      androidStopForegroundOnPause: false,
+      androidStopForegroundOnPause: true,
     ),
   );
   runApp(MyApp());

@@ -21,7 +21,7 @@ class _MyApp extends State<MyApp>{
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => DuckAudioCubit(DuckAudioRepository(),DuckifyAudioHandler()),
+          create: (context) => DuckAudioCubit(DuckAudioRepository(),DuckIfyAudioHandler()),
         ),
       ],
       child: MaterialApp(
