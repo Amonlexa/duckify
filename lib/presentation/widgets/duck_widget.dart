@@ -60,15 +60,15 @@ class DuckWidget extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(width: 8),
-            IconButton(
-              icon: Icon(
-                Icons.play_circle_outline,
-                color: Colors.white,
-                size: 36,
-              ),
-              onPressed: onPlayPressed,
-            ),
+            // SizedBox(width: 8),
+            // IconButton(
+            //   icon: Icon(
+            //     Icons.play_circle_outline,
+            //     color: Colors.white,
+            //     size: 36,
+            //   ),
+            //   onPressed: onPlayPressed,
+            // ),
           ],
         ),
       ),

@@ -1,4 +1,5 @@
-import 'package:duckify/presentation/widgets/audios_list_tab.dart';
+import 'package:duckify/presentation/screens/duck_overview_screen.dart';
+import 'package:duckify/presentation/widgets/duck_list_tab.dart';
 import 'package:flutter/material.dart';
 
 import 'about_screen.dart';
@@ -49,7 +50,6 @@ class _HomeScreen extends State<HomeScreen> with TickerProviderStateMixin {
               leading: Icon(Icons.info),
               title: Text('О приложении'),
               onTap: () {
-                // Navigator.pushNamed(context, AboutScreen());
               },
             ),
           ],
@@ -72,7 +72,7 @@ class _HomeScreen extends State<HomeScreen> with TickerProviderStateMixin {
           TabBarView(
             controller: _tabController,
             children: categories.map((category) {
-              return SoundsListTab(category: category);
+              return DuckListTab(category: category);
             }).toList(),
           ),
         ],

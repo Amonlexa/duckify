@@ -1,10 +1,11 @@
+import 'package:duckify/presentation/screens/duck_overview_screen.dart';
 import 'package:duckify/presentation/widgets/duck_widget.dart';
 import 'package:flutter/material.dart';
 
-class SoundsListTab extends StatelessWidget {
+class DuckListTab extends StatelessWidget {
   final String category;
 
-  const SoundsListTab({super.key, required this.category});
+  const DuckListTab({super.key, required this.category});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +15,10 @@ class SoundsListTab extends StatelessWidget {
         return DuckWidget(
             duck: null,
             onTap: () {
-
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const DuckOverviewScreen()),
+              );
             },
             onPlayPressed: () {
 
