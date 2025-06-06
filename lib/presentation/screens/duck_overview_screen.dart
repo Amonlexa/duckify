@@ -5,7 +5,6 @@ import 'package:duckify/presentation/widgets/play_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:just_audio/just_audio.dart';
 
 class DuckOverviewScreen extends StatefulWidget {
 
@@ -25,81 +24,102 @@ class _DuckOverviewScreen extends State<DuckOverviewScreen> {
   Widget build(BuildContext context) {
     return BlocBuilder<DuckAudioCubit, DuckAudioState>(
       builder: (context, state) {
+        final duck = state is DuckCallLoaded ? state.currentSound : null;
         return Scaffold(
-          backgroundColor: Color(0xFF2E3B2C),
-          extendBodyBehindAppBar: true,
-          appBar: AppBar(
-            title: Text("duck.name"),
-            backgroundColor: Color(0xFF2E3B2C),
-            foregroundColor: Colors.white,
-          ),
-          body: Padding(
-            padding: const EdgeInsets.all(16.0),
+          backgroundColor: const Color(0xFF2E3B2C),
+          body: SafeArea(
+            top: false,
             child: ListView(
+              padding: EdgeInsets.zero,
               children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(12),
-                  child: Image.asset(
-                    'assets/images/kryakva.jpg',
-                    width: double.infinity,
-                    height: 200,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                SizedBox(height: 16),
-                Text(
-                  "duck.name",
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
-                SizedBox(height: 8),
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                  decoration: BoxDecoration(
-                    color: Colors.amberAccent.withOpacity(0.3),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Text(
-                    "duck.category",
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.amberAccent,
+                Stack(
+                  alignment: Alignment.bottomRight,
+                  children: [
+                    Container(
+                      height: 200,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage('assets/images/kryakva.jpg'),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      child: Container(
+                        color: Colors.black.withOpacity(0.3), // затемнение
+                      ),
                     ),
-                  ),
+                    Positioned(
+                      right: 16,
+                      top: 40,
+                      child: CircleAvatar(
+                        backgroundColor: Colors.white.withOpacity(0.7),
+                        child: Icon(
+                          Icons.favorite_outline,
+                          color: Colors.red,
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      left: 16,
+                      top: 40,
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: CircleAvatar(
+                          backgroundColor: Colors.white.withOpacity(0.7),
+                          child: Icon(Icons.arrow_back, color: Colors.black),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-                SizedBox(height: 16),
-                Text(
-                  "duck.description" ??
-                      "Здесь должно быть описание вида "", его поведение, среда обитания и особенности крика.",
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.white70,
-                    height: 1.5,
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        duck?.title ?? "Манок",
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                      SizedBox(height: 16),
+                      Text(
+                        duck?.description ??
+                            "Здесь должно быть описание вида манка, его поведение, среда обитания и особенности крика.",
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.white70,
+                          height: 1.5,
+                        ),
+                      ),
+                      SizedBox(height: 24),
+                      Text(
+                        'Звуки ${duck?.title ?? ''}',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                      SizedBox(height: 12),
+                      SoundListItem(
+                        soundName: 'Кряква',
+                        duration: "10",
+                        isPlaying: false,
+                        onPlayPressed: () {
+                          context.read<DuckAudioCubit>().selectAndPlaySound();
+                        },
+                        onFavoritePressed: () {
+                          context.read<DuckAudioCubit>().stopSound();
+                        },
+                      ),
+                    ],
                   ),
-                ),
-                SizedBox(height: 24),
-                Text(
-                  'Звуки ${"duck.name"}',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
-                SizedBox(height: 12),
-                SoundListItem(
-                  soundName: 'Кряква',
-                  duration: "10",
-                  isPlaying: false,
-                  onPlayPressed: () {
-                    context.read<DuckAudioCubit>().selectAndPlaySound();
-                  },
-                  onFavoritePressed: () {
-                    context.read<DuckAudioCubit>().stopSound();
-                  },
                 ),
               ],
             ),

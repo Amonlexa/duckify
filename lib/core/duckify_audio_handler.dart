@@ -19,6 +19,7 @@ class DuckIfyAudioHandler extends BaseAudioHandler with QueueHandler,SeekHandler
     _isPlayerDisposed = false;
   }
 
+  //Запускаем музыку
   Future<void> playSoundWithDelay(String assetPath, String title) async {
     try {
       if (_isPlayerDisposed) {
@@ -29,10 +30,11 @@ class DuckIfyAudioHandler extends BaseAudioHandler with QueueHandler,SeekHandler
 
       await _player.stop();
 
+      //инициализация уведомления музыки
       mediaItem.add(MediaItem(
         id: assetPath,
         title: title,
-        album: "Манки",
+        album: "Тестовый",
         artUri: await getImageFileFromAssets(),
       ));
 
@@ -41,7 +43,7 @@ class DuckIfyAudioHandler extends BaseAudioHandler with QueueHandler,SeekHandler
           MediaControl.pause,
         ],
         systemActions: const {MediaAction.seek},
-        androidCompactActionIndices: const [0], // Только pause и stop
+        androidCompactActionIndices: const [0], // Только pause
         processingState: AudioProcessingState.ready,
         playing: true,
         updatePosition: Duration.zero,
