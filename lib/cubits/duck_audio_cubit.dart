@@ -13,23 +13,40 @@ class DuckAudioCubit extends Cubit<DuckAudioState> {
   Future<void> loadSounds() async {
     emit(DuckCallLoading());
     try {
-      final sounds = await _repository.getAllAudios();
-      emit(DuckCallLoaded(sounds: sounds));
+      final sounds = await _repository.getAllAudios(); // получаем список манков без длительностей
+
+      final soundsWithDurations = await Future.wait(sounds.map((sound) async {
+        final durations = await getDurationsForAudios(sound.audioPaths!);
+        return sound.copyWith(durations: durations); // <-- вот он!
+      }));
+
+      emit(DuckCallLoaded(sounds: soundsWithDurations));
     } catch (e) {
       emit(DuckCallError(message: 'Не удалось загрузить звуки'));
     }
   }
 
-
-  void selectAndPlaySound() {
-    print('play2');
-    _audioService.playSoundWithDelay("assets/audios/kryakva-2.mp3", "Кряква");
-    emit(DuckCallLoaded(currentSound: DuckAudio("assets/audios/kryakva-2.mp3", "title", "description", "assets/audios/kryakva.mp3", "image", ['']), sounds: []));
+  void selectAndPlaySound() async {
+    String asset = 'assets/audios/kryakva-2.mp3';
+    _audioService.playSoundWithDelay(asset, "Кряква");
+    // emit(DuckCallLoaded(currentSound: DuckAudio( "title", "description", "assets/audios/kryakva.mp3", "image", [''], durations: []), sounds: []));
   }
 
   void stopSound() async{
-    _audioService.stop(); // или pauseSound(), зависит от логики
-    emit(DuckCallLoaded(sounds: [])); // Обновляем состояние
+    _audioService.stop();
+    emit(DuckCallLoaded(sounds: []));
   }
+
+  Future<List<Duration?>> getDurationsForAudios(List<String> audioPaths) async {
+    final List<Duration?> durations = [];
+
+    for (var path in audioPaths) {
+      final duration = await _audioService.getDuration(path);
+      durations.add(duration);
+    }
+
+    return durations;
+  }
+
 
 }

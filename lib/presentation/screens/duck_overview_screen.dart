@@ -92,7 +92,7 @@ class _DuckOverviewScreen extends State<DuckOverviewScreen> {
                 SizedBox(height: 12),
                 SoundListItem(
                   soundName: 'Кряква',
-                  duration: '09',
+                  duration: "10",
                   isPlaying: false,
                   onPlayPressed: () {
                     context.read<DuckAudioCubit>().selectAndPlaySound();
@@ -108,4 +108,6 @@ class _DuckOverviewScreen extends State<DuckOverviewScreen> {
       },
     );
   }
+
+
 }
