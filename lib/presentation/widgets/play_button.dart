@@ -42,7 +42,7 @@ class SoundListItem extends StatelessWidget {
       ),
       trailing: IconButton(
         icon: Icon(
-          isFavorite ? Icons.star : Icons.star_outline,
+          isFavorite ? Icons.stop : Icons.stop,
           color: isFavorite ? Colors.amberAccent : Colors.white70,
           size: 28,
         ),

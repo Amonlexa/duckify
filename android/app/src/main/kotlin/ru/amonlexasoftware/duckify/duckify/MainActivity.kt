@@ -1,6 +1,5 @@
 package ru.amonlexasoftware.duckify.duckify
-import com.ryanheise.audioservice.AudioServiceFragmentActivity
 
-import io.flutter.embedding.android.FlutterActivity
+import com.ryanheise.audioservice.AudioServiceActivity
 
-class MainActivity : AudioServiceFragmentActivity()
+class MainActivity : AudioServiceActivity()
