@@ -2,7 +2,6 @@ import 'package:duckify/presentation/screens/duck_overview_screen.dart';
 import 'package:duckify/presentation/widgets/duck_list_tab.dart';
 import 'package:flutter/material.dart';
 
-import 'about_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -13,6 +12,9 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreen extends State<HomeScreen> with TickerProviderStateMixin {
   final List<String> categories = ['Кураанахтар', 'Уу', 'Хаастар'];
   TabController? _tabController;
+
+
+
   @override
   void initState() {
     _tabController = TabController(length: 3, vsync: this);

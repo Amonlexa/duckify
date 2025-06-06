@@ -6,11 +6,18 @@ import 'package:flutter/services.dart';
 class DuckAudioRepository {
 
 
-  Future<List<DuckAudio>> getAllAudios() async {
-    final String jsonString = await rootBundle.loadString('assets/json/duck_audios.json');
+  Future<List<DuckAudio>> getAudiosByCategory(String category) async {
+    final String jsonString = await rootBundle.loadString('assets/duck_audios.json');
     final List<dynamic> jsonList = json.decode(jsonString);
 
-    return jsonList.map((item) => DuckAudio.fromJson(item)).toList();
+    // Преобразуем JSON в список DuckAudio и фильтруем по категории
+    final List<DuckAudio> allAudios = jsonList
+        .map((item) => DuckAudio.fromJson(item))
+        .where((audio) => audio.categories!.contains(category))
+        .toList();
+
+
+    return allAudios;
   }
 
 }

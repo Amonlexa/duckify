@@ -1,6 +1,9 @@
+import 'package:duckify/cubits/duck_audio_cubit.dart';
+import 'package:duckify/cubits/duck_audio_state.dart';
 import 'package:duckify/presentation/screens/duck_overview_screen.dart';
 import 'package:duckify/presentation/widgets/duck_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DuckListTab extends StatelessWidget {
   final String category;
@@ -9,21 +12,28 @@ class DuckListTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: 20,
-      itemBuilder: (context, index) {
-        return DuckWidget(
-            duck: null,
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const DuckOverviewScreen()),
+    return BlocBuilder<DuckAudioCubit, DuckAudioState>(
+      bloc: context.read()!..loadSounds(category),
+      builder: (context, state) {
+        if(state is DuckCallLoading) {
+          return Center(child: CircularProgressIndicator());
+        }
+        if(state is DuckCallLoaded) {
+          return ListView.builder(
+            itemCount: state.sounds.length,
+            itemBuilder: (context, index) {
+              return DuckWidget(
+                duck: state.sounds[index],
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => DuckOverviewScreen(duck: state.sounds[index])));
+                },
               );
             },
-            onPlayPressed: () {
-
-            }
-        );
+          );
+        }
+       return Center(
+         child: Text('Данная категория пока пустая',style: TextStyle(fontFamily: 'Roboto',color: Colors.white,fontSize: 15),),
+       );
       },
     );
   }

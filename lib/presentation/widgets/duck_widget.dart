@@ -3,15 +3,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class DuckWidget extends StatelessWidget {
-  DuckAudio? duck;
-  final VoidCallback onTap;        // Открытие детальной информации
-  final VoidCallback onPlayPressed; // Воспроизведение звука
 
-  DuckWidget({
+
+  final DuckAudio? duck;
+  final VoidCallback onTap;        // Открытие детальной информации
+
+  const DuckWidget({
     super.key,
     this.duck,
     required this.onTap,
-    required this.onPlayPressed,
   });
 
   @override
@@ -30,7 +30,7 @@ class DuckWidget extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(8),
               child: Image.asset(
-                "assets/images/kryakva.jpg",
+                duck!.image.toString(),
                 width: 60,
                 height: 60,
                 fit: BoxFit.cover,
@@ -42,7 +42,7 @@ class DuckWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Название утки",
+                    duck!.title.toString(),
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -51,7 +51,7 @@ class DuckWidget extends StatelessWidget {
                   ),
                   SizedBox(height: 4),
                   Text(
-                    "Категория",
+                    duck!.categories!.toList(growable: true).toString(),
                     style: TextStyle(
                       fontSize: 14,
                       color: Colors.white70,
@@ -60,15 +60,6 @@ class DuckWidget extends StatelessWidget {
                 ],
               ),
             ),
-            // SizedBox(width: 8),
-            // IconButton(
-            //   icon: Icon(
-            //     Icons.play_circle_outline,
-            //     color: Colors.white,
-            //     size: 36,
-            //   ),
-            //   onPressed: onPlayPressed,
-            // ),
           ],
         ),
       ),

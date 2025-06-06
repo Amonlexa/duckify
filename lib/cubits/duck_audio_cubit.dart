@@ -1,6 +1,5 @@
 import 'package:duckify/core/duckify_audio_handler.dart';
 import 'package:duckify/cubits/duck_audio_state.dart';
-import 'package:duckify/data/models/duck_audio.dart';
 import 'package:duckify/data/repositories/duck_audio_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -10,18 +9,20 @@ class DuckAudioCubit extends Cubit<DuckAudioState> {
 
   DuckAudioCubit(this._repository,  this._audioService) : super(DuckCallInitial());
 
-  Future<void> loadSounds() async {
+  Future<void> loadSounds(String category) async {
     emit(DuckCallLoading());
     try {
-      final sounds = await _repository.getAllAudios(); // получаем список манков без длительностей
+      final sounds = await _repository.getAudiosByCategory(category); // получаем список манков без длительностей
+      // final soundsWithDurations = await Future.wait(sounds.map((sound) async {
+      //   final durations = await getDurationsForAudios(sound.audioPaths!);
+      //   return sound.copyWith(durations: durations); // <-- вот он!
+      // }));
 
-      final soundsWithDurations = await Future.wait(sounds.map((sound) async {
-        final durations = await getDurationsForAudios(sound.audioPaths!);
-        return sound.copyWith(durations: durations); // <-- вот он!
-      }));
-
-      emit(DuckCallLoaded(sounds: soundsWithDurations));
+      if (sounds.isNotEmpty) {
+        emit(DuckCallLoaded(sounds: sounds));
+      }
     } catch (e) {
+      print(e);
       emit(DuckCallError(message: 'Не удалось загрузить звуки'));
     }
   }

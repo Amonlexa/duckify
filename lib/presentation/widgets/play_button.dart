@@ -20,7 +20,6 @@ class SoundListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       leading: CircleAvatar(
         backgroundColor: Colors.amberAccent.withOpacity(0.2),
         child: IconButton(

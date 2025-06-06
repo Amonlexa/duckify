@@ -3,18 +3,18 @@
     "id" : "1",
     "title" : "көҕөн",
     "description" : "Кураанах кус",
-    "images" : "assets/images/kryakva.jpg",
+    "image" : "assets/images/kryakva.jpg",
     "audio_paths" : ["assets/audios/kryakva.mp3","assets/audios/kryakva-2.mp3"],
     "durations" : [],
-    "categories" : ["Кураанах"]
+    "categories" : ["Кураанахтар"]
     },
      {
-    "id" : "1",
+    "id" : "2",
     "title" : "көҕөн",
     "description" : "Кураанах кус",
-    "images" : "assets/images/kryakva.jpg",
+    "image" : "assets/images/kryakva.jpg",
     "audio_paths" : ["assets/audios/kryakva.mp3","assets/audios/kryakva-2.mp3"],
     "durations" : [],
-    "categories" : ["Кураанах"]
+    "categories" : ["Кураанахтар"]
     }
 ]
