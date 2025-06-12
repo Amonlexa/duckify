@@ -9,13 +9,13 @@
         {
             "id" : "1",
             "name" : "көҕөн 1",
-            "path" : "assets/audios/kryakva.mp3\",\"assets/audios/kryakva-2.mp3",
+            "path" : "assets/audios/kryakva.mp3",
             "duration" : null
         },
         {
             "id" : "2",
             "name" : "көҕөн 1",
-            "path" : "assets/audios/kryakva.mp3\",\"assets/audios/kryakva-2.mp3",
+            "path" : "assets/audios/kryakva.mp3",
             "duration" : null
         }
     ]
@@ -30,13 +30,13 @@
         {
             "id" : "3",
             "name" : "көҕөн 1",
-            "path" : "assets/audios/kryakva.mp3\",\"assets/audios/kryakva-2.mp3",
+            "path" : "assets/audios/kryakva-2.mp3",
             "duration" : null
         },
         {
             "id" : "4",
             "name" : "көҕөн 1",
-            "path" : "assets/audios/kryakva.mp3\",\"assets/audios/kryakva-2.mp3",
+            "path" : "assets/audios/kryakva-2.mp",
             "duration" : null
         }
     ]

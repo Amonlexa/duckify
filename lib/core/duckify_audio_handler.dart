@@ -20,7 +20,7 @@ class DuckIfyAudioHandler extends BaseAudioHandler with QueueHandler,SeekHandler
   }
 
   //Запускаем музыку
-  Future<void> playSoundWithDelay(String assetPath, String title) async {
+  Future<void> playSoundWithDelay(String assetPath, String title,String image) async {
     try {
       if (_isPlayerDisposed) {
         _initPlayer();
@@ -35,7 +35,7 @@ class DuckIfyAudioHandler extends BaseAudioHandler with QueueHandler,SeekHandler
         id: assetPath,
         title: title,
         album: "Тестовый",
-        artUri: await getImageFileFromAssets(),
+        artUri: await getImageFileFromAssets(image),
       ));
 
       playbackState.add(PlaybackState(
@@ -71,8 +71,8 @@ class DuckIfyAudioHandler extends BaseAudioHandler with QueueHandler,SeekHandler
     }
   }
 
-  Future<Uri> getImageFileFromAssets() async {
-    final byteData = await rootBundle.load('assets/images/kryakva.jpg');
+  Future<Uri> getImageFileFromAssets(String assetImage) async {
+    final byteData = await rootBundle.load(assetImage);
     final buffer = byteData.buffer;
     Directory tempDir =  await getApplicationDocumentsDirectory();
     String tempPath = tempDir.path;

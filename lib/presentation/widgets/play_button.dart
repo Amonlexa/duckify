@@ -3,18 +3,16 @@ import 'package:flutter/material.dart';
 class SoundListItem extends StatelessWidget {
 
   final DuckAudio audio;
-  final bool isPlaying;
   final VoidCallback onPlayPressed;
   final VoidCallback onFavoritePressed;
-  final bool isFavorite;
+  final bool isPlaying;
 
   const SoundListItem({
     super.key,
-    required this.isPlaying,
     required this.onPlayPressed,
     required this.onFavoritePressed,
-    this.isFavorite = false,
     required this.audio,
+    required this.isPlaying,
   });
 
   @override
@@ -39,14 +37,14 @@ class SoundListItem extends StatelessWidget {
         audio.duration ?? 'test',
         style: TextStyle(color: Colors.white, fontSize: 14),
       ),
-      trailing: IconButton(
-        icon: Icon(
-          isFavorite ? Icons.stop : Icons.stop,
-          color: isFavorite ? Colors.amberAccent : Colors.white70,
-          size: 28,
-        ),
-        onPressed: onFavoritePressed,
-      ),
+      // trailing: IconButton(
+      //   icon: Icon(
+      //     Icons.favorite_border,
+      //     color:  Colors.amberAccent,
+      //     size: 28,
+      //   ),
+      //   onPressed: onFavoritePressed,
+      // ),
     );
   }
 }

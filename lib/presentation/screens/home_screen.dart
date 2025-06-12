@@ -1,47 +1,65 @@
-import 'package:duckify/presentation/screens/duck_overview_screen.dart';
+import 'package:duckify/cubits/duck_audio_cubit.dart';
+import 'package:duckify/cubits/duck_audio_state.dart';
+import 'package:duckify/data/models/duck_audio.dart';
 import 'package:duckify/presentation/widgets/duck_list_tab.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
   @override
   State<StatefulWidget> createState() => _HomeScreen();
 }
 
-class _HomeScreen extends State<HomeScreen> with TickerProviderStateMixin {
-  final List<String> categories = ['Кураанахтар', 'Уу', 'Хаастар'];
-  TabController? _tabController;
-
+class _HomeScreen extends State<HomeScreen> with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
+  static const List<Tab> myTabs = <Tab>[
+    Tab(text: 'Кураанахтар'),
+    Tab(text: 'Уу'),
+    Tab(text: 'Хаастар'),
+  ];
+  late TabController _tabController;
 
 
   @override
   void initState() {
-    _tabController = TabController(length: 3, vsync: this);
     super.initState();
+    _tabController = TabController(vsync: this, length: myTabs.length);
+    _tabController.addListener(() {
+      if (!_tabController.indexIsChanging) {
+        context.read<DuckAudioCubit>().loadSounds(myTabs[_tabController.index].text!);
+      }
+    });
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<DuckAudioCubit>().loadSounds(myTabs.first.text.toString());
+    });
   }
+
+
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Кустар куоластара',style: TextStyle(fontSize: 15,color: Colors.amberAccent)),
-        backgroundColor: Color(0xFF2E3B2C),
-        centerTitle: true,
-        bottom: TabBar(
-          controller: _tabController,
-          tabs: categories.map((c) => Tab(text: c)).toList(),
-          labelColor: Colors.amberAccent,
-          unselectedLabelColor: Colors.white70,
-          indicator: BoxDecoration(
-            border: Border(
-              bottom: BorderSide(
-                color: Colors.amberAccent,
-                width: 3.0,
+          title: Text('Кустар куоластара', style: TextStyle(fontSize: 15, color: Colors.amberAccent)),
+          backgroundColor: Color(0xFF2E3B2C),
+          centerTitle: true,
+          bottom: TabBar(
+            controller: _tabController,
+            tabs: myTabs,
+            labelColor: Colors.amberAccent,
+            unselectedLabelColor: Colors.white70,
+            indicator: BoxDecoration(
+              border: Border(
+                bottom: BorderSide(
+                  color: Colors.amberAccent,
+                  width: 3.0,
+                ),
               ),
             ),
-          ),
-        )
+          )
       ),
       drawer: Drawer(
         child: ListView(
@@ -51,8 +69,7 @@ class _HomeScreen extends State<HomeScreen> with TickerProviderStateMixin {
             ListTile(
               leading: Icon(Icons.info),
               title: Text('О приложении'),
-              onTap: () {
-              },
+              onTap: () {},
             ),
           ],
         ),
@@ -73,12 +90,41 @@ class _HomeScreen extends State<HomeScreen> with TickerProviderStateMixin {
           ),
           TabBarView(
             controller: _tabController,
-            children: categories.map((category) {
-              return DuckListTab(category: category);
+            children: myTabs.map((Tab tab) {
+              return BlocBuilder<DuckAudioCubit, DuckAudioState>(
+                buildWhen: (prev, current) => current.category == tab.text || prev.category == tab.text,
+                builder: (context, state) {
+                  if (state is DuckCallLoading) {
+                    return Center(child: CircularProgressIndicator());
+                  }
+                  if (state is DuckCallLoaded) {
+                    return DuckListTab(ducks: state.ducks);
+                  }
+                  if (state is DuckCallError) {
+                    return Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(state.message),
+                          ElevatedButton(
+                            onPressed: () => context.read<DuckAudioCubit>().loadSounds(tab.text.toString()),
+                            child: Text('Повторить'),
+                          ),
+                        ],
+                      ),
+                    );
+                  }
+
+                  return Center(child: CircularProgressIndicator());
+                },
+              );
             }).toList(),
-          ),
+          )
         ],
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

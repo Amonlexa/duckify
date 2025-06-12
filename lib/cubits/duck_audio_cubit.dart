@@ -1,53 +1,57 @@
 import 'package:duckify/core/duckify_audio_handler.dart';
 import 'package:duckify/cubits/duck_audio_state.dart';
+import 'package:duckify/data/models/duck.dart';
+import 'package:duckify/data/models/duck_audio.dart';
 import 'package:duckify/data/repositories/duck_audio_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DuckAudioCubit extends Cubit<DuckAudioState> {
   final DuckAudioRepository _repository;
   final DuckIfyAudioHandler _audioService;
+  final Map<String, List<Duck>> _cache = {}; // Просто кеш в памяти
 
-  DuckAudioCubit(this._repository,  this._audioService) : super(DuckCallInitial());
+  DuckAudioCubit(this._repository, this._audioService) : super(DuckCallInitial());
+
 
   Future<void> loadSounds(String category) async {
-    emit(DuckCallLoading());
+    print('load sounds');
+    if (_cache.containsKey(category)) { // Если есть в кеше - сразу отдаем
+      emit(DuckCallLoaded(ducks: _cache[category]!, category: category));
+      return;
+    }
+
+    emit(DuckCallLoading(category: category));
+
     try {
-      final ducks = await _repository.getAudiosByCategory(category); // получаем список манков без длительностей
-      // final soundsWithDurations = await Future.wait(sounds.map((sound) async {
-      //   final durations = await getDurationsForAudios(sound.audioPaths!);
-      //   return sound.copyWith(durations: durations); // <-- вот он!
-      // }));
-
-      if (ducks.isNotEmpty) {
-        emit(DuckCallLoaded(ducks: ducks));
-      }
+      final ducks = await _repository.getAudiosByCategory(category);
+      _cache[category] = ducks; // Сохраняем в кеш
+      emit(DuckCallLoaded(ducks: ducks, category: category));
     } catch (e) {
-      print(e);
-      emit(DuckCallError(message: 'Не удалось загрузить звуки'));
+      emit(DuckCallError(message: 'Ошибка загрузки', category: category));
     }
   }
 
-  void selectAndPlaySound() async {
-    String asset = 'assets/audios/kryakva-2.mp3';
-    _audioService.playSoundWithDelay(asset, "Кряква");
-    // emit(DuckCallLoaded(currentSound: DuckAudio( "title", "description", "assets/audios/kryakva.mp3", "image", [''], durations: []), sounds: []));
+  void selectAndPlaySound(DuckAudio audio, String image) {
+    if (state is! DuckCallLoaded) return;
+
+    final currentState = state as DuckCallLoaded;
+    _audioService.playSoundWithDelay(audio.path!, audio.name!, image);
+
+    emit(currentState.copyWith(
+      currentAudio: audio,
+      isPlaying: true,
+    ));
   }
 
-  void stopSound() async{
-    _audioService.stop();
-    emit(DuckCallLoaded(ducks: []));
+  Future<void> stopSound() async {
+    if (state is! DuckCallLoaded) return;
+
+    await _audioService.stop();
+    final currentState = state as DuckCallLoaded;
+
+    emit(currentState.copyWith(
+      currentAudio: null,
+      isPlaying: false,
+    ));
   }
-
-  Future<List<Duration?>> getDurationsForAudios(List<String> audioPaths) async {
-    final List<Duration?> durations = [];
-
-    for (var path in audioPaths) {
-      final duration = await _audioService.getDuration(path);
-      durations.add(duration);
-    }
-
-    return durations;
-  }
-
-
 }

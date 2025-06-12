@@ -108,14 +108,19 @@ class _DuckOverviewScreen extends State<DuckOverviewScreen> {
                         shrinkWrap: true,
                         padding: EdgeInsets.zero,
                         itemBuilder: (context, index) {
+                          final currentAudio = widget.duck.audios![index];
                           return SoundListItem(
-                            audio: widget.duck.audios![index],
-                            isPlaying: false,
-                            onPlayPressed: () {
-                              context.read<DuckAudioCubit>().selectAndPlaySound();
+                            audio: currentAudio,
+                            isPlaying: state is DuckCallLoaded && state.isPlaying && currentAudio.id == state.currentAudio!.id,
+                            onPlayPressed: () async {
+                              if(state is DuckCallLoaded && state.isPlaying && currentAudio.id == state.currentAudio!.id){
+                              context.read<DuckAudioCubit>().stopSound();
+                              }else{
+                                context.read<DuckAudioCubit>().selectAndPlaySound(widget.duck.audios![index], widget.duck.image!);
+                              }
                             },
                             onFavoritePressed: () {
-                              context.read<DuckAudioCubit>().stopSound();
+                             //Добавить в избранное
                             },
                           );
                         },

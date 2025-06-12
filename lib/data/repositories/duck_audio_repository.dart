@@ -4,20 +4,24 @@ import 'package:duckify/data/models/duck.dart';
 import 'package:flutter/services.dart';
 
 class DuckAudioRepository {
+  static List<Duck>? _cachedAllDucks;
 
+  Future<List<Duck>> _loadAllDucks() async {
+    if (_cachedAllDucks != null) return _cachedAllDucks!;
 
-  Future<List<Duck>> getAudiosByCategory(String category) async {
     final String jsonString = await rootBundle.loadString('assets/duck_audios.json');
     final List<dynamic> jsonList = json.decode(jsonString);
 
-    // Преобразуем JSON в список DuckAudio и фильтруем по категории
-    final List<Duck> allAudios = jsonList
-        .map((item) => Duck.fromJson(item))
-        .where((audio) => audio.categories!.contains(category))
-        .toList();
-
-
-    return allAudios;
+    _cachedAllDucks = jsonList.map((item) => Duck.fromJson(item)).toList();
+    return _cachedAllDucks!;
   }
 
+  Future<List<Duck>> getAudiosByCategory(String category) async {
+    final allDucks = await _loadAllDucks();
+    return allDucks.where((duck) => duck.categories!.contains(category)).toList();
+  }
+
+  Future<void> preloadAllData() async {
+    await _loadAllDucks();
+  }
 }
