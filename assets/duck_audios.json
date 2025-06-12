@@ -4,17 +4,41 @@
     "title" : "көҕөн",
     "description" : "Кураанах кус",
     "image" : "assets/images/kryakva.jpg",
-    "audio_paths" : ["assets/audios/kryakva.mp3","assets/audios/kryakva-2.mp3"],
-    "durations" : [],
-    "categories" : ["Кураанахтар"]
+    "categories" : ["Кураанахтар"],
+    "audios" : [
+        {
+            "id" : "1",
+            "name" : "көҕөн 1",
+            "path" : "assets/audios/kryakva.mp3\",\"assets/audios/kryakva-2.mp3",
+            "duration" : null
+        },
+        {
+            "id" : "2",
+            "name" : "көҕөн 1",
+            "path" : "assets/audios/kryakva.mp3\",\"assets/audios/kryakva-2.mp3",
+            "duration" : null
+        }
+    ]
     },
      {
     "id" : "2",
     "title" : "көҕөн",
     "description" : "Кураанах кус",
     "image" : "assets/images/kryakva.jpg",
-    "audio_paths" : ["assets/audios/kryakva.mp3","assets/audios/kryakva-2.mp3"],
-    "durations" : [],
-    "categories" : ["Кураанахтар"]
+    "categories" : ["Кураанахтар"],
+    "audios" : [
+        {
+            "id" : "3",
+            "name" : "көҕөн 1",
+            "path" : "assets/audios/kryakva.mp3\",\"assets/audios/kryakva-2.mp3",
+            "duration" : null
+        },
+        {
+            "id" : "4",
+            "name" : "көҕөн 1",
+            "path" : "assets/audios/kryakva.mp3\",\"assets/audios/kryakva-2.mp3",
+            "duration" : null
+        }
+    ]
     }
 ]

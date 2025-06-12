@@ -1,7 +1,6 @@
-import 'package:audio_service/audio_service.dart';
 import 'package:duckify/cubits/duck_audio_cubit.dart';
 import 'package:duckify/cubits/duck_audio_state.dart';
-import 'package:duckify/data/models/duck_audio.dart';
+import 'package:duckify/data/models/duck.dart';
 import 'package:duckify/presentation/widgets/play_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DuckOverviewScreen extends StatefulWidget {
 
-  final DuckAudio duck;
+  final Duck duck;
 
   const DuckOverviewScreen({super.key, required this.duck});
 
@@ -105,13 +104,12 @@ class _DuckOverviewScreen extends State<DuckOverviewScreen> {
                       ),
                       SizedBox(height: 5),
                       ListView.builder(
-                        itemCount: widget.duck.audioPaths!.length,
+                        itemCount: widget.duck.audios!.length,
                         shrinkWrap: true,
                         padding: EdgeInsets.zero,
                         itemBuilder: (context, index) {
                           return SoundListItem(
-                            soundName: widget.duck.audioPaths![index],
-                            duration: "10",
+                            audio: widget.duck.audios![index],
                             isPlaying: false,
                             onPlayPressed: () {
                               context.read<DuckAudioCubit>().selectAndPlaySound();

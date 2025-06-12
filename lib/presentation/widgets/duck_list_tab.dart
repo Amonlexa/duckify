@@ -20,12 +20,12 @@ class DuckListTab extends StatelessWidget {
         }
         if(state is DuckCallLoaded) {
           return ListView.builder(
-            itemCount: state.sounds.length,
+            itemCount: state.ducks.length,
             itemBuilder: (context, index) {
               return DuckWidget(
-                duck: state.sounds[index],
+                duck: state.ducks[index],
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => DuckOverviewScreen(duck: state.sounds[index])));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => DuckOverviewScreen(duck: state.ducks[index])));
                 },
               );
             },

@@ -1,3 +1,4 @@
+import 'package:duckify/data/models/duck.dart';
 import 'package:duckify/data/models/duck_audio.dart';
 
 abstract class DuckAudioState {}
@@ -7,17 +8,17 @@ class DuckCallInitial extends DuckAudioState {}
 class DuckCallLoading extends DuckAudioState {}
 
 class DuckCallLoaded extends DuckAudioState {
-  final List<DuckAudio> sounds;
+  final List<Duck> ducks;
   final DuckAudio? currentSound;
 
   DuckCallLoaded({
-    required this.sounds,
+    required this.ducks,
     this.currentSound,
   });
 
   DuckCallLoaded copyWith({DuckAudio? selectedSound}) {
     return DuckCallLoaded(
-      sounds: sounds,
+      ducks: ducks,
       currentSound: selectedSound ?? currentSound,
     );
   }

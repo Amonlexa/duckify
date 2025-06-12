@@ -1,11 +1,11 @@
-import 'package:duckify/data/models/duck_audio.dart';
+import 'package:duckify/data/models/duck.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class DuckWidget extends StatelessWidget {
 
 
-  final DuckAudio? duck;
+  final Duck? duck;
   final VoidCallback onTap;        // Открытие детальной информации
 
   const DuckWidget({

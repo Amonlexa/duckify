@@ -12,14 +12,14 @@ class DuckAudioCubit extends Cubit<DuckAudioState> {
   Future<void> loadSounds(String category) async {
     emit(DuckCallLoading());
     try {
-      final sounds = await _repository.getAudiosByCategory(category); // получаем список манков без длительностей
+      final ducks = await _repository.getAudiosByCategory(category); // получаем список манков без длительностей
       // final soundsWithDurations = await Future.wait(sounds.map((sound) async {
       //   final durations = await getDurationsForAudios(sound.audioPaths!);
       //   return sound.copyWith(durations: durations); // <-- вот он!
       // }));
 
-      if (sounds.isNotEmpty) {
-        emit(DuckCallLoaded(sounds: sounds));
+      if (ducks.isNotEmpty) {
+        emit(DuckCallLoaded(ducks: ducks));
       }
     } catch (e) {
       print(e);
@@ -35,7 +35,7 @@ class DuckAudioCubit extends Cubit<DuckAudioState> {
 
   void stopSound() async{
     _audioService.stop();
-    emit(DuckCallLoaded(sounds: []));
+    emit(DuckCallLoaded(ducks: []));
   }
 
   Future<List<Duration?>> getDurationsForAudios(List<String> audioPaths) async {

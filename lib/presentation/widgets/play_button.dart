@@ -1,7 +1,8 @@
+import 'package:duckify/data/models/duck_audio.dart';
 import 'package:flutter/material.dart';
 class SoundListItem extends StatelessWidget {
-  final String soundName;
-  final String duration;
+
+  final DuckAudio audio;
   final bool isPlaying;
   final VoidCallback onPlayPressed;
   final VoidCallback onFavoritePressed;
@@ -9,12 +10,11 @@ class SoundListItem extends StatelessWidget {
 
   const SoundListItem({
     super.key,
-    required this.soundName,
-    required this.duration,
     required this.isPlaying,
     required this.onPlayPressed,
     required this.onFavoritePressed,
     this.isFavorite = false,
+    required this.audio,
   });
 
   @override
@@ -32,11 +32,11 @@ class SoundListItem extends StatelessWidget {
         ),
       ),
       title: Text(
-        soundName,
+        audio.name!,
         style: TextStyle(color: Colors.white, fontSize: 16),
       ),
       subtitle: Text(
-        duration,
+        audio.duration ?? 'test',
         style: TextStyle(color: Colors.white, fontSize: 14),
       ),
       trailing: IconButton(
