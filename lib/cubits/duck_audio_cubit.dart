@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:duckify/core/duckify_audio_handler.dart';
 import 'package:duckify/cubits/duck_audio_state.dart';
 import 'package:duckify/data/models/duck.dart';
@@ -8,10 +10,21 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DuckAudioCubit extends Cubit<DuckAudioState> {
   final DuckAudioRepository _repository;
-  final DuckIfyAudioHandler _audioService;
-  final Map<String, List<Duck>> _cache = {}; // Просто кеш в памяти
+  final DuckIfyAudioHandler _audioHandler;
+  final Map<String, List<Duck>> _cache = {};
+  StreamSubscription? _playbackStateSubscription;
 
-  DuckAudioCubit(this._repository, this._audioService) : super(DuckCallInitial());
+  DuckAudioCubit(this._repository, this._audioHandler) : super(DuckCallInitial()) {
+    _playbackStateSubscription = _audioHandler.playbackState.listen((state) {
+      if (this.state is DuckCallLoaded) {
+        final current = this.state as DuckCallLoaded;
+        if (current.isPlaying != state.playing) {
+          emit(current.copyWith(isPlaying: state.playing));
+        }
+      }
+    });
+  }
+
 
 
   Future<void> loadSounds(String category) async {
@@ -36,7 +49,7 @@ class DuckAudioCubit extends Cubit<DuckAudioState> {
     if (state is! DuckCallLoaded) return;
 
     final currentState = state as DuckCallLoaded;
-    _audioService.playSoundWithDelay(audio.path!, audio.name!, image);
+    _audioHandler.playSoundWithDelay(audio.path!, audio.name!, image);
 
     emit(currentState.copyWith(
       currentAudio: audio,
@@ -47,7 +60,7 @@ class DuckAudioCubit extends Cubit<DuckAudioState> {
   Future<void> stopSound() async {
     if (state is! DuckCallLoaded) return;
 
-    await _audioService.stop();
+    await _audioHandler.stop();
 
     emit(DuckCallLoaded(
       ducks: (state as DuckCallLoaded).ducks,
@@ -61,32 +74,18 @@ class DuckAudioCubit extends Cubit<DuckAudioState> {
 
   Future<void> togglePause() async {
     if (state is! DuckCallLoaded) return;
-    final current = state as DuckCallLoaded;
 
+    final current = state as DuckCallLoaded;
     if (current.isPlaying) {
-      await pauseSound();
+      await _audioHandler.pause();
     } else {
-      await resume();
+      await _audioHandler.play();
     }
   }
 
-
-  Future<void> resume() async {
-    if (state is! DuckCallLoaded) return;
-    final current = state as DuckCallLoaded;
-
-    await _audioService.resume();
-    emit(current.copyWith(isPlaying: true));
-  }
-
-  Future<void> pauseSound () async {
-    if (state is! DuckCallLoaded) return;
-
-    await _audioService.pause();
-    final currentState = state as DuckCallLoaded;
-
-    emit(currentState.copyWith(
-      isPlaying: false,
-    ));
+  @override
+  Future<void> close() {
+    _playbackStateSubscription?.cancel();
+    return super.close();
   }
 }

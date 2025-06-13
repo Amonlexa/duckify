@@ -43,6 +43,7 @@ class _HomeScreen extends State<HomeScreen> with TickerProviderStateMixin, Autom
   Widget build(BuildContext context) {
     super.build(context);
     return Scaffold(
+      floatingActionButton: FloatingMediaControl(),
       appBar: AppBar(
           title: Text('Кустар куоластара', style: TextStyle(fontSize: 15, color: Colors.amberAccent)),
           backgroundColor: Color(0xFF2E3B2C),
@@ -123,7 +124,6 @@ class _HomeScreen extends State<HomeScreen> with TickerProviderStateMixin, Autom
               );
             }).toList(),
           ),
-          FloatingMediaControl()
         ],
       ),
     );

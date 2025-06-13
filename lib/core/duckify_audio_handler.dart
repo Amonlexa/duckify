@@ -7,7 +7,7 @@ import 'package:path_provider/path_provider.dart';
 
 class DuckIfyAudioHandler extends BaseAudioHandler with QueueHandler,SeekHandler {
   late AudioPlayer _player;
-  StreamSubscription? _currentPlaybackSubscription;
+  StreamSubscription? _playerStateSubscription;
   bool _isPlayerDisposed = false;
 
   DuckIfyAudioHandler() {
@@ -17,59 +17,70 @@ class DuckIfyAudioHandler extends BaseAudioHandler with QueueHandler,SeekHandler
   void _initPlayer() {
     _player = AudioPlayer();
     _isPlayerDisposed = false;
+    _setupPlayerListeners();
+  }
+
+  void _setupPlayerListeners() {
+    _playerStateSubscription?.cancel();
+    _playerStateSubscription = _player.playerStateStream.listen((state) {
+      playbackState.add(playbackState.value.copyWith(
+        playing: state.playing,
+        processingState: _mapProcessingState(state.processingState),
+      ));
+
+      print("Player state updated: ${state.processingState}, playing: ${state.playing}");
+    });
+  }
+
+
+  AudioProcessingState _mapProcessingState(ProcessingState state) {
+    switch (state) {
+      case ProcessingState.idle: return AudioProcessingState.idle;
+      case ProcessingState.loading: return AudioProcessingState.loading;
+      case ProcessingState.buffering: return AudioProcessingState.buffering;
+      case ProcessingState.ready: return AudioProcessingState.ready;
+      case ProcessingState.completed: return AudioProcessingState.completed;
+    }
   }
 
   //Запускаем музыку
-  Future<void> playSoundWithDelay(String assetPath, String title,String image) async {
+  Future<void> playSoundWithDelay(String assetPath, String title, String image) async {
     try {
-      if (_isPlayerDisposed) {
-        _initPlayer();
-      }
-
-      _currentPlaybackSubscription?.cancel();
+      if (_isPlayerDisposed) _initPlayer();
 
       await _player.stop();
+      await _player.setAsset(assetPath);
 
-      //инициализация уведомления музыки
       mediaItem.add(MediaItem(
         id: assetPath,
         title: title,
-        album: "Тестовый",
         artUri: await getImageFileFromAssets(image),
       ));
 
-      playbackState.add(PlaybackState(
-        controls: [
-          MediaControl.pause,
-        ],
-        systemActions: const {MediaAction.seek},
-        androidCompactActionIndices: const [0], // Только pause
-        processingState: AudioProcessingState.ready,
-        playing: true,
-        updatePosition: Duration.zero,
-        bufferedPosition: Duration.zero,
-        speed: 1.0,
-        queueIndex: null,
-      ));
-
-      await _player.setAsset(assetPath);
       await _player.play();
-
-      // Подписываемся на состояние
-      _currentPlaybackSubscription = _player.playerStateStream.listen((state) async {
-        print("Current player state: ${_player.playerState}");
-        if (state.processingState == ProcessingState.completed) {
-          await Future.delayed(Duration(seconds: 1));
-          await _player.seek(Duration.zero);
-          await _player.play();
-        }
-      });
-
-    } catch (e, stackTrace) {
-      print("Ошибка воспроизведения: $e");
-      print(stackTrace);
+    } catch (e) {
+      print("Playback error: $e");
     }
   }
+
+  @override
+  Future<void> pause() async {
+    await _player.pause();
+  }
+
+  @override
+  Future<void> play() async {
+    await _player.play();
+  }
+
+  @override
+  Future<void> stop() async {
+    await _player.stop();
+    _playerStateSubscription?.cancel();
+    await _player.dispose();
+    _isPlayerDisposed = true;
+  }
+
 
   Future<Uri> getImageFileFromAssets(String assetImage) async {
     final byteData = await rootBundle.load(assetImage);
@@ -80,45 +91,8 @@ class DuckIfyAudioHandler extends BaseAudioHandler with QueueHandler,SeekHandler
     return (await File(filePath).writeAsBytes(buffer.asUint8List(byteData.offsetInBytes, byteData.lengthInBytes))).uri;
   }
 
-
-
-  @override
-  Future<void> stop() async {
-    await _player.stop();
-    await _player.dispose();
-    _currentPlaybackSubscription = null;
-    _isPlayerDisposed = true;
-    await super.stop();
-  }
-
-
-  Future<void> resume() async {
-      await _player.play();
-      _currentPlaybackSubscription!.resume();
-      playbackState.add(playbackState.value.copyWith(playing: true));
-  }
-
-  @override
-  Future<void> pause() async {
-    await _player.pause();
-    _currentPlaybackSubscription!.pause();
-    playbackState.add(playbackState.value.copyWith(playing: false));
-  }
-
-  @override
-  Future<void> play() async {
-    await _player.play();
-    playbackState.add(playbackState.value.copyWith(playing: true));
-  }
-
-
   Future<Duration?> getDuration(String assetPath) {
     return _player.setUrl(assetPath);
   }
-
-  @override
-  Future<void> seek(Duration position) => _player.seek(position);
-
-
 
 }

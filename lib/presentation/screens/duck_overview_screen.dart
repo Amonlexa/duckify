@@ -1,6 +1,7 @@
 import 'package:duckify/cubits/duck_audio_cubit.dart';
 import 'package:duckify/cubits/duck_audio_state.dart';
 import 'package:duckify/data/models/duck.dart';
+import 'package:duckify/presentation/widgets/floating_media_control.dart';
 import 'package:duckify/presentation/widgets/play_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +27,7 @@ class _DuckOverviewScreen extends State<DuckOverviewScreen> {
       builder: (context, state) {
         return Scaffold(
           backgroundColor: const Color(0xFF2E3B2C),
+          floatingActionButton: FloatingMediaControl(),
           body: SafeArea(
             top: false,
             child: ListView(
@@ -84,7 +86,7 @@ class _DuckOverviewScreen extends State<DuckOverviewScreen> {
                           ),
                         ),
                       )
-                    )
+                    ),
                   ],
                 ),
                 Padding(
