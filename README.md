@@ -1,16 +1,28 @@
-# duckify
+# Duckify - Манок для уток 🦆
 
-Мобильное приложение - манок для уток и гусей
+<img src="assets/app_icon.png" width="120" align="right">
 
-## Getting Started
+Приложение-манок для охоты на уток с коллекцией аудиозаписей птичьих голосов.  
+Реализовано на Flutter с использованием BLoC/Cubit для управления состоянием.
 
-This project is a starting point for a Flutter application.
+[![Flutter](https://img.shields.io/badge/Flutter-3.13+-blue.svg)](https://flutter.dev)
+[![Dart](https://img.shields.io/badge/Dart-3.1+-blue.svg)](https://dart.dev)
 
-A few resources to get you started if this is your first Flutter project:
+## 📱 Основные функции
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- Воспроизведение аудиозаписей манков
+- Разделение по категориям уток
+- Фоновая работа аудио
+- Системные медиа-уведомления
+- Быстрый доступ к часто используемым манкам
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 🏗️ Архитектура
+MVC - Model View Controller
+В качестве названия состояния используется библиотека , которая позволяет удобно управлять состояниями приложений без чрезмерной сложности. Вся логика взаимодействия с аудио и UI-состояниями вынесена в .flutter_blocCubitaudio_cubit.dart
+
+## 🛠️ Технологии
+
+- **Аудио**: `just_audio` + `audio_service` для фонового воспроизведения
+- **Стейт-менеджмент**: `flutter_bloc` + `cubit`
+- **Для файловой системы**: `path_provider`
+- **Для сравнения моделей и процедур**: `equatable`
