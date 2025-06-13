@@ -1,44 +1,565 @@
 [
     {
     "id" : "1",
-    "title" : "көҕөн",
+    "title" : "Чөркөй",
     "description" : "Кураанах кус",
-    "image" : "assets/images/kryakva.jpg",
+    "image" : "chirok.jpg",
     "categories" : ["Кураанахтар"],
     "audios" : [
         {
             "id" : "1",
-            "name" : "көҕөн 1",
-            "path" : "assets/audios/kryakva.mp3",
+            "name" : "Чөркөй 1",
+            "path" : "chirok-svistunok-golos-1.mp3",
+            "duration" : null
+        },
+         {
+            "id" : "2",
+            "name" : "Чөркөй 2",
+            "path" : "chirok-svistunok-golos-2.mp3",
+            "duration" : null
+        },
+         {
+            "id" : "3",
+            "name" : "Чөркөй 2",
+            "path" : "chirok-svistunok-golos-3.mp3",
             "duration" : null
         },
         {
-            "id" : "2",
-            "name" : "көҕөн 1",
-            "path" : "assets/audios/kryakva.mp3",
+            "id" : "4",
+            "name" : "Таас чөркөй 1",
+            "path" : "chirok-treskunok-golos-1.mp3",
+            "duration" : null
+        },
+        {
+            "id" : "5",
+            "name" : "Таас чөркөй 2",
+            "path" : "chirok-treskunok-golos-2.mp3",
+            "duration" : null
+        },
+         {
+            "id" : "6",
+            "name" : "Таас чөркөй 3",
+            "path" : "chirok-treskunok-golos-3.mp3",
+            "duration" : null
+        }
+    ]
+    },
+    {
+    "id" : "2",
+    "title" : "Көҕөн",
+    "description" : "Кураанах кус",
+    "image" : "kryakva.jpg",
+    "categories" : ["Кураанахтар"],
+    "audios" : [
+        {
+            "id" : "8",
+            "name" : "Көҕөн 1",
+            "path" : "kryakva-golos-1-1.mp3",
+            "duration" : null
+        },
+         {
+            "id" : "9",
+            "name" : "Көҕөн 2",
+            "path" : "kryakva-golos-2-1.mp3",
+            "duration" : null
+        },
+         {
+            "id" : "10",
+            "name" : "Көҕөн 3",
+            "path" : "ckryakva-golos-3-1.mp3",
+            "duration" : null
+        },
+          {
+            "id" : "11",
+            "name" : "Көҕөн 4",
+            "path" : "kryakva-golos-1.mp3",
+            "duration" : null
+        },
+          {
+            "id" : "12",
+            "name" : "Көҕөн 5",
+            "path" : "kryakva-golos-6.mp3",
+            "duration" : null
+        },
+          {
+            "id" : "13",
+            "name" : "Көҕөн 6",
+            "path" : "kryakva-golos-7.mp3",
+            "duration" : null
+        },
+          {
+            "id" : "14",
+            "name" : "Көҕөн 7",
+            "path" : "kryakva-golos-8.mp3",
+            "duration" : null
+        },
+          {
+            "id" : "15",
+            "name" : "Көҕөн 8",
+            "path" : "kryakva-golos-10.mp3",
+            "duration" : null
+        },
+          {
+            "id" : "16",
+            "name" : "Көҕөн 9",
+            "path" : "kryakva-golos-9.mp3",
+            "duration" : null
+        }
+    ]
+    },
+    {
+    "id" : "3",
+    "title" : "Халба",
+    "description" : "Кураанах кус",
+    "image" : "halba.jpg",
+    "categories" : ["Кураанахтар"],
+    "audios" : [
+          {
+            "id" : "17",
+            "name" : "Халба 1",
+            "path" : "shirokonoska-golos-1.mp3",
+            "duration" : null
+        },
+           {
+            "id" : "18",
+            "name" : "Халба 2",
+            "path" : "shirokonoska-golos-2.mp3",
+            "duration" : null
+        }
+    ]
+    },
+    {
+    "id" : "3",
+    "title" : "Мороду",
+    "description" : "Кураанах кус",
+    "image" : "kloktun.jpg",
+    "categories" : ["Кураанахтар"],
+    "audios" : [
+          {
+            "id" : "19",
+            "name" : "Мороду 1",
+            "path" : "kloktun-golos-2.mp3",
+            "duration" : null
+        }
+    ]
+    },
+    {
+    "id" : "4",
+    "title" : "Моонньоҕон",
+    "description" : "Кураанах кус",
+    "image" : "shilo.jpg",
+    "categories" : ["Кураанахтар"],
+    "audios" : [
+          {
+            "id" : "20",
+            "name" : "Моонньоҕон 1",
+            "path" : "shilo1.mp3",
+            "duration" : null
+        },
+        {
+            "id" : "21",
+            "name" : "Моонньоҕон 1",
+            "path" : "shilo2.mp3",
+            "duration" : null
+        }
+    ]
+    },
+      {
+    "id" : "5",
+    "title" : "Тыыйаах",
+    "description" : "Кураанах кус",
+    "image" : "sviaz.jpg",
+    "categories" : ["Кураанахтар"],
+    "audios" : [
+          {
+            "id" : "22",
+            "name" : "Тыыйаах 1",
+            "path" : "sviyaz-golos-1.mp3",
+            "duration" : null
+        },
+        {
+            "id" : "23",
+            "name" : "Тыыйаах 2",
+            "path" : "sviyaz-golos-2.mp3",
+            "duration" : null
+        },
+           {
+            "id" : "24",
+            "name" : "Тыыйаах 3",
+            "path" : "sviyaz-golos-4.mp3",
+            "duration" : null
+        },
+           {
+            "id" : "25",
+            "name" : "Тыыйаах 4",
+            "path" : "sviyaz-golos-8.mp3",
+            "duration" : null
+        },
+           {
+            "id" : "26",
+            "name" : "Тыыйаах 5",
+            "path" : "sviyaz-golos-10.mp3",
+            "duration" : null
+        }
+    ]
+    },
+    {
+    "id" : "6",
+    "title" : "Анды",
+    "description" : "Уу куhа",
+    "image" : "turpan.jpg",
+    "categories" : ["Уу"],
+    "audios" : [
+          {
+            "id" : "27",
+            "name" : "Анды 1",
+            "path" : "obyknovennyy-turpan-golos-1.mp3",
+            "duration" : null
+        },
+        {
+            "id" : "28",
+            "name" : "Анды 2",
+            "path" : "43185701.mp3",
+            "duration" : null
+        },
+          {
+            "id" : "29",
+            "name" : "Анды 3",
+            "path" : "escoumins5.mp3",
             "duration" : null
         }
     ]
     },
      {
-    "id" : "2",
-    "title" : "көҕөн",
-    "description" : "Кураанах кус",
-    "image" : "assets/images/kryakva.jpg",
-    "categories" : ["Кураанахтар"],
+    "id" : "7",
+    "title" : "Ээбиллэ",
+    "description" : "Уу куhа",
+    "image" : "moryanka.jpg",
+    "categories" : ["Уу"],
     "audios" : [
-        {
-            "id" : "3",
-            "name" : "көҕөн 1",
-            "path" : "assets/audios/kryakva-2.mp3",
+          {
+            "id" : "30",
+            "name" : "Ээбиллэ 1",
+            "path" : "moryanka-golos-1.mp3",
             "duration" : null
         },
         {
-            "id" : "4",
-            "name" : "көҕөн 1",
-            "path" : "assets/audios/kryakva-2.mp3",
+            "id" : "31",
+            "name" : "Ээбиллэ 2",
+            "path" : "moryanka-golos-2.mp3",
+            "duration" : null
+        },
+          {
+            "id" : "32",
+            "name" : "Ээбиллэ 3",
+            "path" : "moryanka-golos-4.mp3",
+            "duration" : null
+        }
+    ]
+    },
+     {
+    "id" : "8",
+    "title" : "Умсаах 1",
+    "description" : "Уу куhа",
+    "image" : "umsaah2.jpg",
+    "categories" : ["Уу","Кураанахтар"],
+    "audios" : [
+         {
+            "id" : "33",
+            "name" : "Умсаах 1",
+            "path" : "morskaya-chernet-golos-1.mp3",
+            "duration" : null
+        },
+         {
+            "id" : "34",
+            "name" : "Умсаах 1",
+            "path" : "morskaya-chernet-golos-2.mp3",
+            "duration" : null
+        },
+         {
+            "id" : "35",
+            "name" : "Умсаах 1",
+            "path" : "morskaya-chernet-golos-3.mp3",
+            "duration" : null
+        }
+    ]
+    },
+    {
+    "id" : "9",
+    "title" : "Умсаах 2",
+    "description" : "Уу куhа",
+    "image" : "umsaah1.jpg",
+    "categories" : ["Уу","Кураанахтар"],
+    "audios" : [
+          {
+            "id" : "36",
+            "name" : "Умсаах 1",
+            "path" : "beloglazaya-chernet-golos-2.mp3",
+            "duration" : null
+        }
+    ]
+    },
+     {
+    "id" : "10",
+    "title" : "Умсаах 3",
+    "description" : "Уу куhа",
+    "image" : "umsaah3.jpg",
+    "categories" : ["Уу","Кураанахтар"],
+    "audios" : [
+          {
+            "id" : "37",
+            "name" : "Умсаах 1",
+            "path" : "hohlataya-chernet-golos-1.mp3",
+            "duration" : null
+        },
+         {
+            "id" : "38",
+            "name" : "Умсаах 2",
+            "path" : "hohlataya-chernet-golos-2.mp3",
+            "duration" : null
+        },
+         {
+            "id" : "39",
+            "name" : "Умсаах 3",
+            "path" : "hohlataya-chernet-golos-3.mp3",
+            "duration" : null
+        }
+    ]
+    },
+     {
+    "id" : "11",
+    "title" : "Орулуос",
+    "description" : "Уу куhа",
+    "image" : "gogol.jpg",
+    "categories" : ["Уу"],
+    "audios" : [
+          {
+            "id" : "40",
+            "name" : "Орулуос 1",
+            "path" : "obyknovennyy-gogol-golos-2.mp3",
+            "duration" : null
+        },
+         {
+            "id" : "41",
+            "name" : "Орулуос 2",
+            "path" : "obyknovennyy-gogol-golos-1.mp3",
+            "duration" : null
+        }
+    ]
+    },
+     {
+    "id" : "12",
+    "title" : "Булчут/Балыксыт/Билгиннэх",
+    "description" : "Уу куhа",
+    "image" : "lutok.jpg",
+    "categories" : ["Уу"],
+    "audios" : [
+          {
+            "id" : "42",
+            "name" : "Балыксыт 1",
+            "path" : "lutok-golos-1.mp3",
+            "duration" : null
+        }
+    ]
+    },
+    {
+    "id" : "13",
+    "title" : "Куо5ас 1",
+    "description" : "Уу куhа",
+    "image" : "gagara1.jpg",
+    "categories" : ["Уу"],
+    "audios" : [
+          {
+            "id" : "43",
+            "name" : "Куо5ас 1",
+            "path" : "belosheynaya-gagara-golos-1.mp3",
+            "duration" : null
+        },
+         {
+            "id" : "44",
+            "name" : "Куо5ас 2",
+            "path" : "belosheynaya-gagara-golos-2.mp3",
+            "duration" : null
+        },
+         {
+            "id" : "45",
+            "name" : "Куо5ас 3",
+            "path" : "belosheynaya-gagara-golos-3.mp3",
+            "duration" : null
+        }
+    ]
+    },
+      {
+    "id" : "14",
+    "title" : "Куо5ас 2",
+    "description" : "Уу куhа",
+    "image" : "gagara2.jpg",
+    "categories" : ["Уу"],
+    "audios" : [
+          {
+            "id" : "46",
+            "name" : "Куо5ас 1",
+            "path" : "chernoklyuvaya-gagara-golos-1.mp3",
+            "duration" : null
+        },
+         {
+            "id" : "47",
+            "name" : "Куо5ас 2",
+            "path" : "chernoklyuvaya-gagara-golos-2.mp3",
+            "duration" : null
+        },
+         {
+            "id" : "48",
+            "name" : "Куо5ас 3",
+            "path" : "chernoklyuvaya-gagara-golos-3.mp3",
+            "duration" : null
+        }
+    ]
+    },
+    {
+    "id" : "15",
+    "title" : "Куо5ас 3",
+    "description" : "Уу куhа",
+    "image" : "gagara3.jpg",
+    "categories" : ["Уу"],
+    "audios" : [
+          {
+            "id" : "49",
+            "name" : "Куо5ас 1",
+            "path" : "chernozobaya-gagara-golos-3.mp3",
+            "duration" : null
+        }
+    ]
+    },
+     {
+    "id" : "16",
+    "title" : "Хара Хаас/Хардыр5ас",
+    "description" : "Хара Хаас/Хардыр5ас",
+    "image" : "kazarka.jpg",
+    "categories" : ["Хаастар"],
+    "audios" : [
+          {
+            "id" : "50",
+            "name" : "Хара хаас 1",
+            "path" : "chernaya-kazarka-golos-2.mp3",
+            "duration" : null
+        },
+         {
+            "id" : "51",
+            "name" : "Хара хаас 2",
+            "path" : "chernaya-kazarka-golos-3.mp3",
+            "duration" : null
+        },
+         {
+            "id" : "52",
+            "name" : "Хара хаас 3",
+            "path" : "chernaya-kazarka-golos-4.mp3",
+            "duration" : null
+        }
+    ]
+    },
+     {
+    "id" : "17",
+    "title" : "Сиэрэй хаас",
+    "description" : "Хаас",
+    "image" : "seriygus.jpg",
+    "categories" : ["Хаастар"],
+    "audios" : [
+          {
+            "id" : "53",
+            "name" : "Сиэрэй хаас 1",
+            "path" : "seryy-gus-golos-1.mp3",
+            "duration" : null
+        },
+         {
+            "id" : "54",
+            "name" : "Сиэрэй хаас 2",
+            "path" : "seryy-gus-golos-6.mp3",
+            "duration" : null
+        },
+         {
+            "id" : "55",
+            "name" : "Сиэрэй хаас 3",
+            "path" : "seryy-gus-golos-7.mp3",
+            "duration" : null
+        }
+    ]
+    },
+    {
+    "id" : "18",
+    "title" : "Эриэн түөс",
+    "description" : "Хаас",
+    "image" : "belolobygus.jpg",
+    "categories" : ["Хаастар"],
+    "audios" : [
+          {
+            "id" : "56",
+            "name" : "Эриэн түөс 1",
+            "path" : "belolobyy-gus-golos-3.mp3",
+            "duration" : null
+        },
+         {
+            "id" : "57",
+            "name" : "Эриэн түөс 2",
+            "path" : "belolobyy-gus-golos-4.mp3",
+            "duration" : null
+        },
+         {
+            "id" : "58",
+            "name" : "Эриэн түөс 3",
+            "path" : "belolobyy-gus-golos-8.mp3",
+            "duration" : null
+        }
+    ]
+    },
+    {
+    "id" : "19",
+    "title" : "Алтан харах",
+    "description" : "Хаас",
+    "image" : "piskulka.jpg",
+    "categories" : ["Хаастар"],
+    "audios" : [
+          {
+            "id" : "59",
+            "name" : "Алтан харах 1",
+            "path" : "piskulka-golos-1.mp3",
+            "duration" : null
+        },
+         {
+            "id" : "60",
+            "name" : "Алтан харах 2",
+            "path" : "piskulka-golos-2.mp3",
+            "duration" : null
+        }
+    ]
+    },
+    {
+    "id" : "20",
+    "title" : "Хоҥор хаас",
+    "description" : "Хаас",
+    "image" : "gumennik.jpg",
+    "categories" : ["Хаастар"],
+    "audios" : [
+          {
+            "id" : "61",
+            "name" : "Хоҥор хаас 1",
+            "path" : "gumennik-golos-1.mp3",
+            "duration" : null
+        },
+         {
+            "id" : "62",
+            "name" : "Хоҥор хаас 2",
+            "path" : "gumennik-golos-3.mp3",
+            "duration" : null
+        },
+          {
+            "id" : "63",
+            "name" : "Хоҥор хаас 3",
+            "path" : "gumennik-golos-2.mp3",
             "duration" : null
         }
     ]
     }
+    
+    
 ]

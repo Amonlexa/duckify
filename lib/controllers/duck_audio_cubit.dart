@@ -25,23 +25,25 @@ class DuckAudioCubit extends Cubit<DuckAudioState> {
   }
 
 
+  Future<void> preloadAllCategories(List<String> categories) async {
+    for (var category in categories) {
+      if (_cache.containsKey(category)) continue;
 
-  Future<void> loadSounds(String category) async {
-    print('load sounds');
-    if (_cache.containsKey(category)) { // Если есть в кеше - сразу отдаем
-      emit(DuckCallLoaded(ducks: _cache[category]!, category: category));
-      return;
+      emit(DuckCallLoading(category: category));
+
+      try {
+        final ducks = await _repository.getAudiosByCategory(category);
+        _cache[category] = ducks;
+        emit(DuckCallLoaded(ducks: ducks, category: category));
+      } catch (e) {
+        emit(DuckCallError(message: 'Ошибка', category: category));
+      }
     }
+  }
 
-    emit(DuckCallLoading(category: category));
-
-    try {
-      final ducks = await _repository.getAudiosByCategory(category);
-      _cache[category] = ducks; // Сохраняем в кеш
-      emit(DuckCallLoaded(ducks: ducks, category: category));
-    } catch (e) {
-      emit(DuckCallError(message: 'Ошибка загрузки', category: category));
-    }
+ List<Duck>? getDucksByCategory(String category)  {
+    print('preparing');
+    return _cache[category];
   }
 
   void selectAndPlaySound(DuckAudio audio, String image) {

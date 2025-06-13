@@ -40,7 +40,7 @@ class _DuckOverviewScreen extends State<DuckOverviewScreen> {
                       width: double.infinity,
                       decoration: BoxDecoration(
                         image: DecorationImage(
-                          image: AssetImage(widget.duck.image.toString()),
+                          image: AssetImage("assets/images/${widget.duck.image}"),
                           fit: BoxFit.cover,
                         ),
                       ),

@@ -6,10 +6,11 @@ import 'duck_widget.dart';
 
 class DuckListTab extends StatelessWidget {
 
-
-
   final List<Duck> ducks;
+
   const DuckListTab({super.key, required this.ducks});
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -25,4 +26,7 @@ class DuckListTab extends StatelessWidget {
       },
     );
   }
+
+
 }
+

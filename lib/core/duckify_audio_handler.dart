@@ -45,14 +45,15 @@ class DuckIfyAudioHandler extends BaseAudioHandler with QueueHandler,SeekHandler
 
   //Запускаем музыку
   Future<void> playSoundWithDelay(String assetPath, String title, String image) async {
+    String asset = "assets/audios/$assetPath";
     try {
       if (_isPlayerDisposed) _initPlayer();
 
       await _player.stop();
-      await _player.setAsset(assetPath);
+      await _player.setAsset(asset);
 
       mediaItem.add(MediaItem(
-        id: assetPath,
+        id: asset,
         title: title,
         artUri: await getImageFileFromAssets(image),
       ));
@@ -83,11 +84,11 @@ class DuckIfyAudioHandler extends BaseAudioHandler with QueueHandler,SeekHandler
 
 
   Future<Uri> getImageFileFromAssets(String assetImage) async {
-    final byteData = await rootBundle.load(assetImage);
+    final byteData = await rootBundle.load('assets/images/$assetImage');
     final buffer = byteData.buffer;
     Directory tempDir =  await getApplicationDocumentsDirectory();
     String tempPath = tempDir.path;
-    var filePath = '$tempPath/file_01.png'; // file_01.tmp is dump file, can be anything
+    var filePath = '$tempPath/file_01.png';
     return (await File(filePath).writeAsBytes(buffer.asUint8List(byteData.offsetInBytes, byteData.lengthInBytes))).uri;
   }
 

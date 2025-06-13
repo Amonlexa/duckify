@@ -14,25 +14,18 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreen extends State<HomeScreen> with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
-  static const List<Tab> myTabs = <Tab>[
-    Tab(text: 'Кураанахтар'),
-    Tab(text: 'Уу'),
-    Tab(text: 'Хаастар'),
-  ];
+  static const List<Tab> myTabs = <Tab>[Tab(text: 'Кураанахтар'), Tab(text: 'Уу'), Tab(text: 'Хаастар')];
   late TabController _tabController;
 
 
   @override
   void initState() {
     super.initState();
+    // Предзагрузка всех табов и инициализация таба
     _tabController = TabController(vsync: this, length: myTabs.length);
-    _tabController.addListener(() {
-      if (!_tabController.indexIsChanging) {
-        context.read<DuckAudioCubit>().loadSounds(myTabs[_tabController.index].text!);
-      }
-    });
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<DuckAudioCubit>().loadSounds(myTabs.first.text.toString());
+      final categories = myTabs.map((t) => t.text!).toList();
+      context.read<DuckAudioCubit>().preloadAllCategories(categories);
     });
   }
 
@@ -41,6 +34,7 @@ class _HomeScreen extends State<HomeScreen> with TickerProviderStateMixin, Autom
   @override
   Widget build(BuildContext context) {
     super.build(context);
+
     return Scaffold(
       floatingActionButton: FloatingMediaControl(),
       appBar: AppBar(
@@ -91,37 +85,36 @@ class _HomeScreen extends State<HomeScreen> with TickerProviderStateMixin, Autom
               ),
             ),
           ),
-          TabBarView(
-            controller: _tabController,
-            children: myTabs.map((Tab tab) {
-              return BlocBuilder<DuckAudioCubit, DuckAudioState>(
-                buildWhen: (prev, current) => current.category == tab.text || prev.category == tab.text,
-                builder: (context, state) {
-                  if (state is DuckCallLoading) {
-                    return Center(child: CircularProgressIndicator());
+          BlocBuilder<DuckAudioCubit, DuckAudioState>(
+            buildWhen: (prev, current) {
+              return current is DuckCallLoaded;
+            },
+            builder: (context, state) {
+              if (state is DuckCallLoading) {
+                return Center(child: CircularProgressIndicator());
+              }
+              if (state is DuckCallLoaded) {
+                return TabBarView(
+                  controller: _tabController,
+                  children: myTabs.map((Tab tab) {
+                    final ducks = context.read<DuckAudioCubit>().getDucksByCategory(tab.text!);
+                    return DuckListTab(ducks: ducks!);
                   }
-                  if (state is DuckCallLoaded) {
-                    return DuckListTab(ducks: state.ducks);
-                  }
-                  if (state is DuckCallError) {
-                    return Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(state.message),
-                          ElevatedButton(
-                            onPressed: () => context.read<DuckAudioCubit>().loadSounds(tab.text.toString()),
-                            child: Text('Повторить'),
-                          ),
-                        ],
-                      ),
-                    );
-                  }
-
-                  return Center(child: CircularProgressIndicator());
-                },
-              );
-            }).toList(),
+                  ).toList()
+                );
+              }
+              if (state is DuckCallError) {
+                return Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(state.message),
+                    ],
+                  ),
+                );
+              }
+              return Center(child: CircularProgressIndicator());
+            },
           ),
         ],
       ),

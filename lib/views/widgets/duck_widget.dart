@@ -30,7 +30,7 @@ class DuckWidget extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(8),
               child: Image.asset(
-                duck!.image.toString(),
+                "assets/images/${duck!.image}",
                 width: 60,
                 height: 60,
                 fit: BoxFit.cover,
