@@ -91,9 +91,17 @@ class DuckIfyAudioHandler extends BaseAudioHandler with QueueHandler,SeekHandler
     await super.stop();
   }
 
+
+  Future<void> resume() async {
+      await _player.play();
+      _currentPlaybackSubscription!.resume();
+      playbackState.add(playbackState.value.copyWith(playing: true));
+  }
+
   @override
   Future<void> pause() async {
     await _player.pause();
+    _currentPlaybackSubscription!.pause();
     playbackState.add(playbackState.value.copyWith(playing: false));
   }
 

@@ -2,6 +2,7 @@ import 'package:duckify/cubits/duck_audio_cubit.dart';
 import 'package:duckify/cubits/duck_audio_state.dart';
 import 'package:duckify/data/models/duck_audio.dart';
 import 'package:duckify/presentation/widgets/duck_list_tab.dart';
+import 'package:duckify/presentation/widgets/floating_media_control.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -69,7 +70,9 @@ class _HomeScreen extends State<HomeScreen> with TickerProviderStateMixin, Autom
             ListTile(
               leading: Icon(Icons.info),
               title: Text('О приложении'),
-              onTap: () {},
+              onTap: () {
+
+              },
             ),
           ],
         ),
@@ -119,7 +122,8 @@ class _HomeScreen extends State<HomeScreen> with TickerProviderStateMixin, Autom
                 },
               );
             }).toList(),
-          )
+          ),
+          FloatingMediaControl()
         ],
       ),
     );

@@ -1,6 +1,7 @@
 import 'package:duckify/data/models/duck_audio.dart';
+import 'package:equatable/equatable.dart';
 
-class Duck {
+class Duck  {
   final String? id;
   final String? title;
   final String? description;
@@ -43,6 +44,4 @@ class Duck {
       categories: categories ?? this.categories,
     );
   }
-
-
 }

@@ -14,6 +14,7 @@ dependencies:
   audio_service: ^0.18.18
   just_audio: ^0.10.3
   path_provider: ^2.1.5
+  equatable: ^2.0.7
 
 dev_dependencies:
   flutter_test:

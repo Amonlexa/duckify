@@ -3,6 +3,7 @@ import 'package:duckify/cubits/duck_audio_state.dart';
 import 'package:duckify/data/models/duck.dart';
 import 'package:duckify/data/models/duck_audio.dart';
 import 'package:duckify/data/repositories/duck_audio_repository.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DuckAudioCubit extends Cubit<DuckAudioState> {
@@ -47,10 +48,44 @@ class DuckAudioCubit extends Cubit<DuckAudioState> {
     if (state is! DuckCallLoaded) return;
 
     await _audioService.stop();
+
+    emit(DuckCallLoaded(
+      ducks: (state as DuckCallLoaded).ducks,
+      currentAudio: null,
+      isPlaying: false,
+      category: (state as DuckCallLoaded).category!,
+    ));
+    debugPrint('Stopped state: ${state.props}'); // Проверьте вывод
+    debugPrint('New state: ${state.props}');
+  }
+
+  Future<void> togglePause() async {
+    if (state is! DuckCallLoaded) return;
+    final current = state as DuckCallLoaded;
+
+    if (current.isPlaying) {
+      await pauseSound();
+    } else {
+      await resume();
+    }
+  }
+
+
+  Future<void> resume() async {
+    if (state is! DuckCallLoaded) return;
+    final current = state as DuckCallLoaded;
+
+    await _audioService.resume();
+    emit(current.copyWith(isPlaying: true));
+  }
+
+  Future<void> pauseSound () async {
+    if (state is! DuckCallLoaded) return;
+
+    await _audioService.pause();
     final currentState = state as DuckCallLoaded;
 
     emit(currentState.copyWith(
-      currentAudio: null,
       isPlaying: false,
     ));
   }

@@ -1,4 +1,5 @@
-class DuckAudio {
+
+class DuckAudio{
 
   final String? id;
   final String? name;
@@ -11,6 +12,7 @@ class DuckAudio {
     this.path,
     this.duration,
   });
+
 
   factory DuckAudio.fromJson(Map<String, dynamic> map) {
     return DuckAudio(

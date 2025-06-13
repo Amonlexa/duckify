@@ -1,8 +1,13 @@
 import 'package:duckify/data/models/duck.dart';
 import 'package:duckify/data/models/duck_audio.dart';
+import 'package:equatable/equatable.dart';
 
-abstract class DuckAudioState {
+abstract class DuckAudioState extends Equatable {
   final String? category;
+
+  @override
+  List<Object?> get props => [category];
+
 
   const DuckAudioState({this.category});
 }
@@ -15,7 +20,7 @@ class DuckCallLoading extends DuckAudioState {
   const DuckCallLoading({required String category}) : super(category: category);
 }
 
-class DuckCallLoaded extends DuckAudioState {
+class DuckCallLoaded extends DuckAudioState with EquatableMixin {
   final List<Duck> ducks;
   final DuckAudio? currentAudio;
   final bool isPlaying;
@@ -26,6 +31,10 @@ class DuckCallLoaded extends DuckAudioState {
     this.isPlaying = false,
     required String category,
   }) : super(category: category);
+
+  @override
+  List<Object?> get props => [...super.props, ducks, currentAudio, isPlaying];
+
 
   DuckCallLoaded copyWith({
     List<Duck>? ducks,
@@ -39,6 +48,8 @@ class DuckCallLoaded extends DuckAudioState {
       category: category!,
     );
   }
+
+
 }
 
 class DuckCallError extends DuckAudioState {
