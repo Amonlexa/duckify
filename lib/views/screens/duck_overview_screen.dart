@@ -1,8 +1,8 @@
-import 'package:duckify/cubits/duck_audio_cubit.dart';
-import 'package:duckify/cubits/duck_audio_state.dart';
+import 'package:duckify/controllers/duck_audio_cubit.dart';
+import 'package:duckify/controllers/duck_audio_state.dart';
 import 'package:duckify/data/models/duck.dart';
-import 'package:duckify/presentation/widgets/floating_media_control.dart';
-import 'package:duckify/presentation/widgets/play_button.dart';
+import 'package:duckify/views/widgets/floating_media_control.dart';
+import 'package:duckify/views/widgets/play_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

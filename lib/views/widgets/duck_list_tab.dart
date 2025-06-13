@@ -1,7 +1,8 @@
 import 'package:duckify/data/models/duck.dart';
-import 'package:duckify/presentation/screens/duck_overview_screen.dart';
-import 'package:duckify/presentation/widgets/duck_widget.dart';
+import 'package:duckify/views/screens/duck_overview_screen.dart';
 import 'package:flutter/material.dart';
+
+import 'duck_widget.dart';
 
 class DuckListTab extends StatelessWidget {
 

@@ -1,4 +1,4 @@
-import 'package:duckify/presentation/screens/home_screen.dart';
+import 'package:duckify/views/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 
 

@@ -1,7 +1,6 @@
 import 'dart:async';
-
+import 'package:duckify/controllers/duck_audio_state.dart';
 import 'package:duckify/core/duckify_audio_handler.dart';
-import 'package:duckify/cubits/duck_audio_state.dart';
 import 'package:duckify/data/models/duck.dart';
 import 'package:duckify/data/models/duck_audio.dart';
 import 'package:duckify/data/repositories/duck_audio_repository.dart';
