@@ -86,10 +86,16 @@ class DuckIfyAudioHandler extends BaseAudioHandler with QueueHandler,SeekHandler
   Future<Uri> getImageFileFromAssets(String assetImage) async {
     final byteData = await rootBundle.load('assets/images/$assetImage');
     final buffer = byteData.buffer;
-    Directory tempDir =  await getApplicationDocumentsDirectory();
+    Directory tempDir = await getApplicationDocumentsDirectory();
     String tempPath = tempDir.path;
-    var filePath = '$tempPath/file_01.png';
-    return (await File(filePath).writeAsBytes(buffer.asUint8List(byteData.offsetInBytes, byteData.lengthInBytes))).uri;
+
+    // Уникальное имя файла на основе имени изображения
+    String uniqueFileName = 'image_${assetImage.hashCode}.png';
+    var filePath = '$tempPath/$uniqueFileName';
+
+    return (await File(filePath).writeAsBytes(
+        buffer.asUint8List(byteData.offsetInBytes, byteData.lengthInBytes)))
+        .uri;
   }
 
   Future<Duration?> getDuration(String assetPath) {

@@ -47,6 +47,7 @@ class DuckAudioCubit extends Cubit<DuckAudioState> {
   }
 
   void selectAndPlaySound(DuckAudio audio, String image) {
+    print(image);
     if (state is! DuckCallLoaded) return;
 
     final currentState = state as DuckCallLoaded;

@@ -1,5 +1,7 @@
+import 'package:duckify/controllers/constans.dart';
 import 'package:duckify/controllers/duck_audio_cubit.dart';
 import 'package:duckify/controllers/duck_audio_state.dart';
+import 'package:duckify/views/screens/about_screen.dart';
 import 'package:duckify/views/widgets/duck_list_tab.dart';
 import 'package:duckify/views/widgets/floating_media_control.dart';
 import 'package:flutter/material.dart';
@@ -38,8 +40,8 @@ class _HomeScreen extends State<HomeScreen> with TickerProviderStateMixin, Autom
     return Scaffold(
       floatingActionButton: FloatingMediaControl(),
       appBar: AppBar(
-          title: Text('Кустар куоластара', style: TextStyle(fontSize: 15, color: Colors.amberAccent)),
-          backgroundColor: Color(0xFF2E3B2C),
+          title: Text('Кустар саҥалара', style: TextStyle(fontSize: 15, color: Colors.amberAccent)),
+          backgroundColor: Constants.backgroundColor,
           centerTitle: true,
           bottom: TabBar(
             controller: _tabController,
@@ -56,21 +58,36 @@ class _HomeScreen extends State<HomeScreen> with TickerProviderStateMixin, Autom
             ),
           )
       ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            DrawerHeader(child: Text('Меню')),
-            ListTile(
-              leading: Icon(Icons.info),
-              title: Text('О приложении'),
-              onTap: () {
-
-              },
-            ),
-          ],
-        ),
-      ),
+      // drawer: Drawer(
+      //   backgroundColor: Constants.backgroundColor,
+      //   child: ListView(
+      //     padding: EdgeInsets.zero,
+      //     children: [
+      //       DrawerHeader(child: Column(
+      //         children: [
+      //           Text('Duckify - Кустар саҥалара',style: TextStyle(color: Colors.white, fontSize: 16,fontWeight: FontWeight.bold)),
+      //           const SizedBox(height: 10),
+      //           ClipRRect(
+      //             borderRadius: BorderRadius.circular(8),
+      //             child: Image.asset(
+      //               "assets/images/playstore.png",
+      //               width: 100,
+      //               height: 100,
+      //               fit: BoxFit.cover,
+      //             ),
+      //           ),
+      //         ],
+      //       )),
+      //       ListTile(
+      //         leading: Icon(Icons.info,color: Colors.white,),
+      //         title: Text('Проект туhунан',style: TextStyle(color: Colors.white, fontSize: 16)),
+      //         onTap: () {
+      //           Navigator.push(context, MaterialPageRoute(builder: (context) => AboutScreen()));
+      //         },
+      //       ),
+      //     ],
+      //   ),
+      // ),
       body: Stack(
         children: [
           Container(

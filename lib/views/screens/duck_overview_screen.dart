@@ -1,3 +1,4 @@
+import 'package:duckify/controllers/constans.dart';
 import 'package:duckify/controllers/duck_audio_cubit.dart';
 import 'package:duckify/controllers/duck_audio_state.dart';
 import 'package:duckify/data/models/duck.dart';
@@ -26,7 +27,7 @@ class _DuckOverviewScreen extends State<DuckOverviewScreen> {
     return BlocBuilder<DuckAudioCubit, DuckAudioState>(
       builder: (context, state) {
         return Scaffold(
-          backgroundColor: const Color(0xFF2E3B2C),
+          backgroundColor: Constants.backgroundColor,
           floatingActionButton: FloatingMediaControl(),
           body: SafeArea(
             top: false,
@@ -48,17 +49,17 @@ class _DuckOverviewScreen extends State<DuckOverviewScreen> {
                         color: Colors.black.withOpacity(0.3), // затемнение
                       ),
                     ),
-                    Positioned(
-                      right: 16,
-                      top: 40,
-                      child: CircleAvatar(
-                        backgroundColor: Colors.white.withOpacity(0.7),
-                        child: Icon(
-                          Icons.favorite_outline,
-                          color: Colors.red,
-                        ),
-                      ),
-                    ),
+                    // Positioned(
+                    //   right: 16,
+                    //   top: 40,
+                    //   child: CircleAvatar(
+                    //     backgroundColor: Colors.white.withOpacity(0.7),
+                    //     child: Icon(
+                    //       Icons.favorite_outline,
+                    //       color: Colors.red,
+                    //     ),
+                    //   ),
+                    // ),
                     Positioned(
                       left: 16,
                       top: 40,

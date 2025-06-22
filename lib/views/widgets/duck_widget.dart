@@ -51,7 +51,7 @@ class DuckWidget extends StatelessWidget {
                   ),
                   SizedBox(height: 4),
                   Text(
-                    duck!.categories!.toList(growable: true).toString(),
+                    duck!.categories!.toList(growable: true).join(", ").toString(),
                     style: TextStyle(
                       fontSize: 14,
                       color: Colors.white70,
