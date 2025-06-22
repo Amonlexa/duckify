@@ -1,6 +1,12 @@
 # Duckify - Манок для уток 🦆
 
-<img src="assets/app_icon.png" width="120" align="right">
+<img src="assets/images/playstore.png" width="120" align="right">
+<img src="screenshots/screen_1.jpg" width="120" align="right">
+<img src="screenshots/screen_2.jpg" width="120" align="right">
+<img src="screenshots/screen_3.jpg" width="120" align="right">
+<img src="screenshots/screen_4.jpg" width="120" align="right">
+
+
 
 Приложение-манок для охоты на уток с коллекцией аудиозаписей птичьих голосов.  
 Реализовано на Flutter с использованием BLoC/Cubit для управления состоянием.
